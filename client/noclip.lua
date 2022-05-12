@@ -5,7 +5,15 @@
 
 -- Constants --
 
-local ESX = exports['es_extended']:getSharedObject()
+ESX = nil
+
+Citizen.CreateThread(function()
+    while ESX == nil do
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+        Citizen.Wait(0)
+    end
+end)
+
 local MOVE_UP_KEY = 20
 local MOVE_DOWN_KEY = 44
 local CHANGE_SPEED_KEY = 21
