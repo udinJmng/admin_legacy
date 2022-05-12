@@ -1,6 +1,17 @@
 local RED = "<span style='color: red;'>"
 local GREEN = "<span style='color: lightgreen;'>"
-local ESX = exports['es_extended']:getSharedObject()
+
+
+ESX = nil
+
+Citizen.CreateThread(function()
+    while ESX == nil do
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+        Citizen.Wait(0)
+    end
+end)
+
+
 Panel = {
 	visible = false,
 	selectedPlayer = false,
